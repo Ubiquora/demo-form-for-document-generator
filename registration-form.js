@@ -128,33 +128,46 @@ document.addEventListener('DOMContentLoaded', function () {
             timestamp: new Date().toISOString(),
             ...formData
         };
-        
-        // Submit to Google Sheets
-        fetch(GOOGLE_SHEET_SCRIPT_URL, {
+          // Submit to Google Sheets with timeout and better error handling
+        const submitPromise = fetch(GOOGLE_SHEET_SCRIPT_URL, {
             method: 'POST',
-            mode: 'no-cors',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'text/plain',
             },
             body: JSON.stringify(payload)
+        });
+        
+        // Create a timeout promise
+        const timeoutPromise = new Promise((_, reject) => {
+            setTimeout(() => reject(new Error('Request timeout')), 10000); // 10 second timeout
+        });
+        
+        // Race between the actual request and timeout
+        Promise.race([submitPromise, timeoutPromise])
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Server error: ${response.status}`);
+            }
+            return response.text();
         })
-        .then(() => {
+        .then(data => {
             // Success - show success message
             showSuccessMessage();
             registrationForm.reset();
-        })        .catch(error => {
+        })
+        .catch(error => {
             console.error('Error submitting form:', error);
-            showErrorMessage(getTranslatedText('error.submission'));
+            if (error.message.includes('timeout')) {
+                showErrorMessage(getTranslatedText('error.timeout'));
+            } else {
+                showErrorMessage(getTranslatedText('error.submission'));
+            }
         })
         .finally(() => {
             // Reset button state
             submitButton.disabled = false;
             submitButton.innerHTML = originalButtonText;
         });
-        
-        // Note: Due to CORS policy with Google Apps Script, we can't get a direct response
-        // The form will show success immediately. In production, you might want to implement
-        // a webhook or alternative confirmation method.
     }
     
     // Collect form data
@@ -388,9 +401,9 @@ const translations = {
           // Success messages
         'success.title': 'Registration Successful!',
         'success.message': 'Your employee registration has been submitted successfully. You will receive a confirmation email shortly, and your employment contract will be generated and sent to you.',
-        
-        // Error messages
-        'error.submission': 'There was an error submitting your registration. Please try again.'
+          // Error messages
+        'error.submission': 'There was an error submitting your registration. Please try again.',
+        'error.timeout': 'The request timed out. Please check your internet connection and try again.'
     },
     pl: {
         // Form titles
@@ -480,9 +493,9 @@ const translations = {
           // Success messages
         'success.title': 'Rejestracja Zakończona Pomyślnie!',
         'success.message': 'Twoja rejestracja pracownika została pomyślnie przesłana. Wkrótce otrzymasz e-mail z potwierdzeniem, a Twoja umowa o pracę zostanie wygenerowana i wysłana do Ciebie.',
-        
-        // Error messages
-        'error.submission': 'Wystąpił błąd podczas przesyłania rejestracji. Spróbuj ponownie.'
+          // Error messages
+        'error.submission': 'Wystąpił błąd podczas przesyłania rejestracji. Spróbuj ponownie.',
+        'error.timeout': 'Upłynął limit czasu żądania. Sprawdź połączenie internetowe i spróbuj ponownie.'
     }
 };
 
@@ -549,8 +562,5 @@ function translatePage(language) {
 }
 
 // Initialize language switcher
-initializeLanguageSwitch();
-
-    console.log('Employee Registration Form initialized successfully!');
-    console.log('Don\'t forget to update the GOOGLE_SHEET_SCRIPT_URL with your actual Google Apps Script URL.');
+initializeLanguageSwitch();    console.log('Employee Registration Form initialized successfully!');
 });
