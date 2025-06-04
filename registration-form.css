@@ -146,21 +146,6 @@ fieldset {
     margin-bottom: 1.5rem;
 }
 
-/* Styling for the registered address section when auto-filled */
-fieldset.auto-filled {
-    background-color: rgba(25, 135, 84, 0.05);
-    border-color: rgba(25, 135, 84, 0.2);
-}
-
-fieldset.auto-filled input {
-    background-color: #f8f9fa;
-    color: #6c757d;
-}
-
-fieldset.auto-filled legend {
-    color: #198754;
-}
-
 fieldset legend {
     background-color: transparent;
     border: none;

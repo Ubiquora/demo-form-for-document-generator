@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const registrationForm = document.getElementById('registrationForm');
-    
-    // Configuration - Replace with your actual Google Apps Script Web App URL
-    const GOOGLE_SHEET_SCRIPT_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID_HERE/exec";
+      // Configuration - Replace with your actual Google Apps Script Web App URL
+    const GOOGLE_SHEET_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwYppDQoB0BYmhyADnrpSG9SXvn07R22167wpAse0rlN6ltLGYYicPbuUpZSkpqQSNk/exec";
     
     // Form validation and submission
     registrationForm.addEventListener('submit', function(e) {
@@ -143,10 +142,9 @@ document.addEventListener('DOMContentLoaded', function () {
             // Success - show success message
             showSuccessMessage();
             registrationForm.reset();
-        })
-        .catch(error => {
+        })        .catch(error => {
             console.error('Error submitting form:', error);
-            showErrorMessage('There was an error submitting your registration. Please try again.');
+            showErrorMessage(getTranslatedText('error.submission'));
         })
         .finally(() => {
             // Reset button state
@@ -256,8 +254,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-    
-    // Validate individual field
+      // Validate individual field
     function validateField(field) {
         const existingFeedback = field.parentNode.querySelector('.invalid-feedback');
         if (existingFeedback) {
@@ -266,26 +263,33 @@ document.addEventListener('DOMContentLoaded', function () {
         field.classList.remove('is-invalid');
         
         // Required field validation
-        if (field.hasAttribute('required') && !field.value.trim()) {
-            showFieldError(field, 'This field is required.');
-            return false;
+        if (field.hasAttribute('required')) {
+            if (field.type === 'checkbox') {
+                if (!field.checked) {
+                    showFieldError(field, getTranslatedText('validation.checkboxRequired'));
+                    return false;
+                }
+            } else if (!field.value.trim()) {
+                showFieldError(field, getTranslatedText('validation.fieldRequired'));
+                return false;
+            }
         }
         
         // Specific field validations
         if (field.type === 'email' && field.value && !isValidEmail(field.value)) {
-            showFieldError(field, 'Please enter a valid email address.');
+            showFieldError(field, getTranslatedText('validation.emailInvalid'));
             return false;
         }
         
         if (field.type === 'tel' && field.value && !isValidPhone(field.value)) {
-            showFieldError(field, 'Please enter a valid phone number.');
+            showFieldError(field, getTranslatedText('validation.phoneInvalid'));
             return false;
         }
         
         if (field.id === 'salary' && field.value) {
             const salary = parseFloat(field.value);
-            if (salary < 0) {
-                showFieldError(field, 'Salary must be a positive number.');
+            if (salary <= 0) {
+                showFieldError(field, getTranslatedText('validation.salaryMinimum'));
                 return false;
             }
         }
@@ -381,10 +385,12 @@ const translations = {
         'validation.ageMinimum': 'Employee must be at least 16 years old.',
         'validation.startDatePast': 'Start date cannot be in the past.',
         'validation.salaryMinimum': 'Salary must be greater than 0.',
-        
-        // Success messages
+          // Success messages
         'success.title': 'Registration Successful!',
-        'success.message': 'Your employee registration has been submitted successfully. You will receive a confirmation email shortly, and your employment contract will be generated and sent to you.'
+        'success.message': 'Your employee registration has been submitted successfully. You will receive a confirmation email shortly, and your employment contract will be generated and sent to you.',
+        
+        // Error messages
+        'error.submission': 'There was an error submitting your registration. Please try again.'
     },
     pl: {
         // Form titles
@@ -471,10 +477,12 @@ const translations = {
         'validation.ageMinimum': 'Pracownik musi mieć co najmniej 16 lat.',
         'validation.startDatePast': 'Data rozpoczęcia nie może być w przeszłości.',
         'validation.salaryMinimum': 'Wynagrodzenie musi być większe niż 0.',
-        
-        // Success messages
+          // Success messages
         'success.title': 'Rejestracja Zakończona Pomyślnie!',
-        'success.message': 'Twoja rejestracja pracownika została pomyślnie przesłana. Wkrótce otrzymasz e-mail z potwierdzeniem, a Twoja umowa o pracę zostanie wygenerowana i wysłana do Ciebie.'
+        'success.message': 'Twoja rejestracja pracownika została pomyślnie przesłana. Wkrótce otrzymasz e-mail z potwierdzeniem, a Twoja umowa o pracę zostanie wygenerowana i wysłana do Ciebie.',
+        
+        // Error messages
+        'error.submission': 'Wystąpił błąd podczas przesyłania rejestracji. Spróbuj ponownie.'
     }
 };
 
