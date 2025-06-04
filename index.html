@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Formularz Rejestracyjny</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Registration Form</title>
     <!-- Favicon -->
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
@@ -14,335 +15,159 @@
     <link rel="stylesheet" href="registration-form.css">
 </head>
 
-<body>
-    <div class="container mt-5">
+<body>    <div class="container mt-5">
+        <!-- Language Switch -->
+        <div class="row justify-content-end mb-3">
+            <div class="col-auto">
+                <div class="language-switch">
+                    <select id="languageSelector" class="form-select form-select-sm">
+                        <option value="en">🇬🇧 English</option>
+                        <option value="pl">🇵🇱 Polski</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header bg-primary text-white">
-                        <h2 class="text-center">Rekrutacja 2025/2026 - SP Montessori</h2>
+                        <h2 class="text-center" data-translate="form.title">Employee Registration Form</h2>
+                        <p class="text-center mb-0" data-translate="form.subtitle">Please fill out all required fields to generate your employment contract</p>
                     </div>
                     <div class="card-body">
-                        <form id="registrationForm" novalidate>
+                        <form id="registrationForm" novalidate>                            <!-- Personal Information -->
                             <fieldset class="mb-4">
-                                <legend class="form-label fw-bold">Typ edukacji</legend>
-                                <div class="mb-3">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="educationType" id="schoolEducation" value="Szkolna" checked>
-                                        <label class="form-check-label" for="schoolEducation">Edukacja szkolna</label>
+                                <legend class="form-label fw-bold" data-translate="section.personal">Personal Information</legend>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName" class="form-label" data-translate="field.firstName">First Name <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="firstName" name="firstName" required>
                                     </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="educationType" id="homeEducation" value="Domowa">
-                                        <label class="form-check-label" for="homeEducation">Edukacja domowa</label>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="lastName" class="form-label" data-translate="field.lastName">Last Name <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="lastName" name="lastName" required>
                                     </div>
-                                </div>
-                            </fieldset>
-                            
-                            <fieldset class="mb-4">
-                                <legend class="form-label fw-bold">Dane osobowe ucznia</legend>
-                                <div class="mb-3">
-                                    <label for="firstName" class="form-label">Imiona ucznia</label>
-                                    <input type="text" class="form-control" id="firstName" name="firstName">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="lastName" class="form-label">Nazwisko ucznia</label>
-                                    <input type="text" class="form-control" id="lastName" name="lastName">
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="pesel" class="form-label">PESEL ucznia</label>
-                                        <input type="text" class="form-control" id="pesel" name="pesel" maxlength="11">
-                                        <div class="form-text">Podaj 11-cyfrowy numer PESEL.</div>
+                                        <label for="email" class="form-label" data-translate="field.email">Email Address <span class="text-danger">*</span></label>
+                                        <input type="email" class="form-control" id="email" name="email" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Klasa, do której będzie uczęszczał uczeń</label>
-                                        <select class="form-select" id="grade" name="grade">
-                                            <option value="0">Zerówka</option>
-                                            <option value="1" selected>Klasa 1</option>
-                                            <option value="2">Klasa 2</option>
-                                            <option value="3">Klasa 3</option>
-                                            <option value="4">Klasa 4</option>
-                                            <option value="5">Klasa 5</option>
-                                            <option value="6">Klasa 6</option>
-                                            <option value="7">Klasa 7</option>
-                                            <option value="8">Klasa 8</option>
+                                        <label for="phone" class="form-label" data-translate="field.phone">Phone Number <span class="text-danger">*</span></label>
+                                        <input type="tel" class="form-control" id="phone" name="phone" required>
+                                    </div>
+                                </div>                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="birthDate" class="form-label" data-translate="field.birthDate">Date of Birth <span class="text-danger">*</span></label>
+                                        <input type="date" class="form-control" id="birthDate" name="birthDate" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="idNumber" class="form-label" data-translate="field.idNumber">ID Number <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="idNumber" name="idNumber" data-translate-placeholder="placeholder.idNumber" placeholder="e.g., Driver's License, Passport" required>
+                                        <div class="form-text" data-translate="help.idNumber">Enter your driver's license, passport, or other government-issued ID number</div>
+                                    </div>
+                                </div>
+                            </fieldset>                            <!-- Employment Information -->
+                            <fieldset class="mb-4">
+                                <legend class="form-label fw-bold" data-translate="section.employment">Employment Information</legend>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="position" class="form-label" data-translate="field.position">Position <span class="text-danger">*</span></label>
+                                        <select class="form-select" id="position" name="position" required>
+                                            <option value="" data-translate="option.selectPosition">Select a position</option>
+                                            <option value="Software Developer" data-translate="position.softwareDeveloper">Software Developer</option>
+                                            <option value="Project Manager" data-translate="position.projectManager">Project Manager</option>
+                                            <option value="Designer" data-translate="position.designer">Designer</option>
+                                            <option value="Data Analyst" data-translate="position.dataAnalyst">Data Analyst</option>
+                                            <option value="Marketing Specialist" data-translate="position.marketingSpecialist">Marketing Specialist</option>
+                                            <option value="Sales Representative" data-translate="position.salesRepresentative">Sales Representative</option>
+                                            <option value="Customer Support" data-translate="position.customerSupport">Customer Support</option>
+                                            <option value="Administrative Assistant" data-translate="position.adminAssistant">Administrative Assistant</option>
+                                            <option value="Other" data-translate="position.other">Other</option>
+                                        </select>                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="department" class="form-label" data-translate="field.department">Department <span class="text-danger">*</span></label>
+                                        <select class="form-select" id="department" name="department" required>
+                                            <option value="" data-translate="option.selectDepartment">Select a department</option>
+                                            <option value="Information Technology" data-translate="department.it">Information Technology</option>
+                                            <option value="Human Resources" data-translate="department.hr">Human Resources</option>
+                                            <option value="Finance" data-translate="department.finance">Finance</option>
+                                            <option value="Marketing" data-translate="department.marketing">Marketing</option>
+                                            <option value="Sales" data-translate="department.sales">Sales</option>
+                                            <option value="Operations" data-translate="department.operations">Operations</option>
+                                            <option value="Customer Service" data-translate="department.customerService">Customer Service</option>
+                                            <option value="Administration" data-translate="department.administration">Administration</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="birthDate" class="form-label">Data urodzenia ucznia</label>
-                                        <input type="date" class="form-control" id="birthDate" name="birthDate">
+                                        <label for="startDate" class="form-label" data-translate="field.startDate">Proposed Start Date <span class="text-danger">*</span></label>
+                                        <input type="date" class="form-control" id="startDate" name="startDate" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="birthPlace" class="form-label">Miejsce urodzenia ucznia</label>
-                                        <input type="text" class="form-control" id="birthPlace" name="birthPlace">
-                                    </div>
-                                </div>
-                            </fieldset>
-                              <fieldset class="mb-4">
-                                <legend class="form-label fw-bold">Adres zamieszkania ucznia</legend>
-                                <div class="row">
-                                    <div class="col-md-12 mb-3">
-                                        <label for="resStreetWithNumber" class="form-label">Ulica z numerem domu</label>
-                                        <input type="text" class="form-control" id="resStreetWithNumber" name="resStreetWithNumber" placeholder="np. Kwiatowa 12/5">
-                                        <div class="form-text">Wpisz nazwę ulicy wraz z numerem domu i mieszkania (jeśli dotyczy)</div>
+                                        <label for="employmentType" class="form-label" data-translate="field.employmentType">Employment Type <span class="text-danger">*</span></label>
+                                        <select class="form-select" id="employmentType" name="employmentType" required>
+                                            <option value="" data-translate="option.selectEmploymentType">Select employment type</option>
+                                            <option value="Full-time" data-translate="employmentType.fullTime">Full-time</option>
+                                            <option value="Part-time" data-translate="employmentType.partTime">Part-time</option>
+                                            <option value="Contract" data-translate="employmentType.contract">Contract</option>
+                                            <option value="Temporary" data-translate="employmentType.temporary">Temporary</option>
+                                            <option value="Internship" data-translate="employmentType.internship">Internship</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-4 mb-3">
-                                        <label for="resPostalCode" class="form-label">Kod pocztowy</label>
-                                        <input type="text" class="form-control" id="resPostalCode" name="resPostalCode" placeholder="00-000">
-                                    </div>
-                                    <div class="col-md-8 mb-3">
-                                        <label for="resCity" class="form-label">Miejscowość</label>
-                                        <input type="text" class="form-control" id="resCity" name="resCity">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="salary" class="form-label" data-translate="field.salary">Expected Annual Salary <span class="text-danger">*</span></label>                        <div class="input-group">
+                            <span class="input-group-text" id="currencySymbol">$</span>
+                            <input type="number" class="form-control" id="salary" name="salary" data-translate-placeholder="placeholder.salary" placeholder="50000" required>
+                        </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-4 mb-3">
-                                        <label for="resVoivodeship" class="form-label">Województwo</label>
-                                        <input type="text" class="form-control" id="resVoivodeship" name="resVoivodeship">
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label for="resCounty" class="form-label">Powiat</label>
-                                        <input type="text" class="form-control" id="resCounty" name="resCounty">
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label for="resCommune" class="form-label">Gmina</label>
-                                        <input type="text" class="form-control" id="resCommune" name="resCommune">
-                                    </div>
-                                </div>
-                            </fieldset>
-                            
-                            <fieldset class="mb-4" id="registeredAddressSection">
-                                <legend class="form-label fw-bold">Adres zameldowania ucznia</legend>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="sameAddress" name="sameAddress">
-                                    <label class="form-check-label" for="sameAddress">Adres zameldowania jest taki sam jak adres zamieszkania</label>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 mb-3">
-                                        <label for="regStreetWithNumber" class="form-label">Ulica z numerem domu</label>
-                                        <input type="text" class="form-control" id="regStreetWithNumber" name="regStreetWithNumber" placeholder="np. Kwiatowa 12/5">
-                                        <div class="form-text">Wpisz nazwę ulicy wraz z numerem domu i mieszkania (jeśli dotyczy)</div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4 mb-3">
-                                        <label for="regPostalCode" class="form-label">Kod pocztowy</label>
-                                        <input type="text" class="form-control" id="regPostalCode" name="regPostalCode" placeholder="00-000">
-                                    </div>
-                                    <div class="col-md-8 mb-3">
-                                        <label for="regCity" class="form-label">Miejscowość</label>
-                                        <input type="text" class="form-control" id="regCity" name="regCity">
-                                    </div>
-                                </div>
-                            </fieldset>
-
+                            </fieldset>                            <!-- Address Information -->
                             <fieldset class="mb-4">
-                                <legend class="form-label fw-bold">Szkoła, do której uczeń obecnie uczęszcza</legend>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="noCurrentSchool" name="noCurrentSchool">
-                                    <label class="form-check-label" for="noCurrentSchool">Dziecko nie uczęszcza obecnie do żadnej szkoły</label>
-                                </div>
-                                <div id="currentSchoolSection">
-                                    <div class="row">
-                                        <div class="col-md-12 mb-3">
-                                            <label for="currentSchoolName" class="form-label">Nazwa i numer szkoły</label>
-                                            <input type="text" class="form-control" id="currentSchoolName" name="currentSchoolName" placeholder="np. Szkoła Podstawowa nr 123 im. Jana Kowalskiego">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 mb-3">
-                                            <label for="currentSchoolAddress" class="form-label">Adres szkoły</label>
-                                            <input type="text" class="form-control" id="currentSchoolAddress" name="currentSchoolAddress" placeholder="np. ul. Przykładowa 1, 00-000 Warszawa">
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>                            <fieldset class="mb-4" id="districtSchoolSection">
-                                <legend class="form-label fw-bold">Szkoła rejonowa, do której w pierwszej kolejności powinno uczęszczać dziecko, ze względu na adres zameldowania</legend>
-                                <div class="mb-3 text-muted small">
-                                    <i class="bi bi-info-circle"></i> Dla dzieci z Krakowa można sprawdzić szkołę rejonową na oficjalnej stronie: <a href="https://rekrutacje-krakow.pzo.edu.pl/elemento-public/region/search" target="_blank" rel="noopener noreferrer">rekrutacje-krakow.pzo.edu.pl <i class="bi bi-box-arrow-up-right ms-1"></i></a>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 mb-3">
-                                        <label for="districtSchoolName" class="form-label">Nazwa i numer szkoły</label>
-                                        <input type="text" class="form-control" id="districtSchoolName" name="districtSchoolName" placeholder="np. Szkoła Podstawowa nr 456 im. Marii Nowak">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 mb-3">
-                                        <label for="districtSchoolAddress" class="form-label">Adres szkoły</label>
-                                        <input type="text" class="form-control" id="districtSchoolAddress" name="districtSchoolAddress" placeholder="np. ul. Szkolna 10, 00-000 Warszawa">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 mb-3">
-                                        <label for="districtSchoolEmail" class="form-label">Adres e-mail szkoły rejonowej</label>
-                                        <input type="email" class="form-control" id="districtSchoolEmail" name="districtSchoolEmail" placeholder="np. sekretariat@szkola456.edu.pl">
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <fieldset class="mb-4">
-                                <legend class="form-label fw-bold">Dane rodzica - mama</legend>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="noMother" name="noMother">
-                                    <label class="form-check-label" for="noMother">Nie podaję danych mamy (np. samotne rodzicielstwo, brak praw rodzicielskich)</label>
-                                    <span class="form-text d-none ms-1" id="noMotherDisabledHint">(Pole nieaktywne, ponieważ potrzebujemy dane co najmniej jednego rodzica)</span>
-                                </div>
-                                <div id="motherDataSection">
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="motherFirstName" class="form-label">Imię</label>
-                                            <input type="text" class="form-control" id="motherFirstName" name="motherFirstName">
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="motherLastName" class="form-label">Nazwisko</label>
-                                            <input type="text" class="form-control" id="motherLastName" name="motherLastName">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="motherPhone" class="form-label">Numer telefonu</label>
-                                            <input type="tel" class="form-control" id="motherPhone" name="motherPhone" placeholder="np. 123456789">
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="motherEmail" class="form-label">Adres e-mail</label>
-                                            <input type="email" class="form-control" id="motherEmail" name="motherEmail">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="motherId" class="form-label">Numer dokumentu tożsamości</label>
-                                            <input type="text" class="form-control" id="motherId" name="motherId" placeholder="np. ABC123456 lub EQW8901424">
-                                            <div class="form-text">Numer dowodu osobistego lub innego dokumentu tożsamości</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
-                            
-                            <fieldset class="mb-4" id="motherAddressSection">
-                                <legend class="form-label fw-bold">Adres zamieszkania mamy</legend>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="motherSameAddress" name="motherSameAddress">
-                                    <label class="form-check-label" for="motherSameAddress">Adres zamieszkania mamy jest taki sam jak adres zamieszkania dziecka</label>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 mb-3">
-                                        <label for="motherStreetWithNumber" class="form-label">Ulica z numerem domu</label>
-                                        <input type="text" class="form-control" id="motherStreetWithNumber" name="motherStreetWithNumber" placeholder="np. Kwiatowa 12/5">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4 mb-3">
-                                        <label for="motherPostalCode" class="form-label">Kod pocztowy</label>
-                                        <input type="text" class="form-control" id="motherPostalCode" name="motherPostalCode" placeholder="00-000">
-                                    </div>
-                                    <div class="col-md-8 mb-3">
-                                        <label for="motherCity" class="form-label">Miejscowość</label>
-                                        <input type="text" class="form-control" id="motherCity" name="motherCity">
-                                    </div>
-                                </div>
-                            </fieldset>
-                            
-                            <fieldset class="mb-4">
-                                <legend class="form-label fw-bold">Dane rodzica - tata</legend>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="noFather" name="noFather">
-                                    <label class="form-check-label" for="noFather">Nie podaję danych taty (np. samotne rodzicielstwo, brak praw rodzicielskich)</label>
-                                    <span class="form-text d-none ms-1" id="noFatherDisabledHint">(Pole nieaktywne, ponieważ potrzebujemy dane co najmniej jednego rodzica)</span>
-                                </div>
-                                <div id="fatherDataSection">
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="fatherFirstName" class="form-label">Imię</label>
-                                            <input type="text" class="form-control" id="fatherFirstName" name="fatherFirstName">
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="fatherLastName" class="form-label">Nazwisko</label>
-                                            <input type="text" class="form-control" id="fatherLastName" name="fatherLastName">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="fatherPhone" class="form-label">Numer telefonu</label>
-                                            <input type="tel" class="form-control" id="fatherPhone" name="fatherPhone" placeholder="np. 123456789">
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="fatherEmail" class="form-label">Adres e-mail</label>
-                                            <input type="email" class="form-control" id="fatherEmail" name="fatherEmail">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="fatherId" class="form-label">Numer dokumentu tożsamości</label>
-                                            <input type="text" class="form-control" id="fatherId" name="fatherId" placeholder="np. ABC123456 lub EQW8901424">
-                                            <div class="form-text">Numer dowodu osobistego lub innego dokumentu tożsamości</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
-                            
-                            <fieldset class="mb-4" id="fatherAddressSection">
-                                <legend class="form-label fw-bold">Adres zamieszkania taty</legend>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="fatherSameAddress" name="fatherSameAddress">
-                                    <label class="form-check-label" for="fatherSameAddress">Adres zamieszkania taty jest taki sam jak adres zamieszkania dziecka</label>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 mb-3">
-                                        <label for="fatherStreetWithNumber" class="form-label">Ulica z numerem domu</label>
-                                        <input type="text" class="form-control" id="fatherStreetWithNumber" name="fatherStreetWithNumber" placeholder="np. Kwiatowa 12/5">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4 mb-3">
-                                        <label for="fatherPostalCode" class="form-label">Kod pocztowy</label>
-                                        <input type="text" class="form-control" id="fatherPostalCode" name="fatherPostalCode" placeholder="00-000">
-                                    </div>
-                                    <div class="col-md-8 mb-3">
-                                        <label for="fatherCity" class="form-label">Miejscowość</label>
-                                        <input type="text" class="form-control" id="fatherCity" name="fatherCity">
-                                    </div>
-                                </div>                            </fieldset>                              <fieldset class="mb-4">
-                                <legend class="form-label fw-bold">Dodatkowe informacje</legend>
-                                <div class="mb-3 text-muted small">
-                                    <i class="bi bi-info-circle"></i> Wszystkie pola w tej sekcji są opcjonalne. Jeśli nie dotyczy, pozostaw pole puste.
+                                <legend class="form-label fw-bold" data-translate="section.address">Address Information</legend>
+                                <div class="mb-3">
+                                    <label for="streetAddress" class="form-label" data-translate="field.streetAddress">Street Address <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="streetAddress" name="streetAddress" data-translate-placeholder="placeholder.streetAddress" placeholder="123 Main Street, Apt 4B" required>
                                 </div>                                <div class="row">
-                                    <div class="col-md-12 mb-3">
-                                        <label for="additionalInfo" class="form-label">Dodatkowe ważne informacje o dziecku</label>
-                                        <textarea class="form-control" id="additionalInfo" name="additionalInfo" rows="3" maxlength="1000"></textarea>
-                                        <div class="form-text d-flex justify-content-between">
-                                            <span>np. stałe choroby, wady rozwojowe, alergie, wskazania bądź przeciwwskazania poradni specjalistycznych wydane w wyniku przeprowadzonych badań itp.</span>
-                                        </div>
+                                    <div class="col-md-8 mb-3">
+                                        <label for="city" class="form-label" data-translate="field.city">City <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="city" name="city" required>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="specialEducationCertificate" class="form-label">Orzeczenie o potrzebie kształcenia specjalnego - numer orzeczenia</label>
-                                        <input type="text" class="form-control" id="specialEducationCertificate" name="specialEducationCertificate">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="zipCode" class="form-label" data-translate="field.zipCode">ZIP Code <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="zipCode" name="zipCode" data-translate-placeholder="placeholder.zipCode" placeholder="12345" required>
                                     </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="psychologicalOpinion" class="form-label">Opinia psychologiczno-pedagogiczna - numer opinii</label>
-                                        <input type="text" class="form-control" id="psychologicalOpinion" name="psychologicalOpinion">
-                                    </div>
+                                </div></fieldset>
+
+                            <!-- Additional Information -->
+                            <fieldset class="mb-4">
+                                <legend class="form-label fw-bold" data-translate="section.additional">Additional Information</legend>
+                                <div class="mb-3">
+                                    <label for="additionalInfo" class="form-label" data-translate="field.additionalInfo">Additional Comments or Special Requirements</label>
+                                    <textarea class="form-control" id="additionalInfo" name="additionalInfo" rows="3" maxlength="500" data-translate-placeholder="placeholder.additionalInfo" placeholder="Any additional information you'd like to share..."></textarea>
+                                    <div class="form-text" data-translate="help.additionalInfo">Optional: Include any special accommodations, certifications, or other relevant information.</div>
                                 </div>
                             </fieldset>
                               
-                              <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="agreement" name="agreement">
-                                <label class="form-check-label" for="agreement">Wyrażam zgodę na otrzymywanie dokumentów w formie elektronicznej</label>
+                            <!-- Agreements -->
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="agreement" name="agreement" required>
+                                <label class="form-check-label" for="agreement" data-translate="agreement.electronic">I agree to receive employment documents electronically <span class="text-danger">*</span></label>
                             </div>
                             
                             <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="dataProcessingConsent" name="dataProcessingConsent">
-                                <label class="form-check-label" for="dataProcessingConsent">Wyrażam zgodę na przetwarzanie moich danych osobowych na potrzeby rekrutacji</label>
+                                <input type="checkbox" class="form-check-input" id="dataProcessingConsent" name="dataProcessingConsent" required>
+                                <label class="form-check-label" for="dataProcessingConsent" data-translate="agreement.dataProcessing">I consent to the processing of my personal data for employment purposes <span class="text-danger">*</span></label>
                             </div>
-                            
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Zarejestruj</button>
+                              <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="bi bi-person-plus me-2"></i><span data-translate="button.submit">Submit Registration</span>
+                                </button>
                             </div>
                         </form>
                     </div>
